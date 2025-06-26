@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>שיחת עברית עם בינה מלאכותית</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Alef', sans-serif;
+      background: linear-gradient(to top, #f2f7ff, #e1ecf7);
+      margin: 0; padding: 0; direction: rtl;
+    }
+    header {
+      background-color: #4a90e2;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+      font-size: 1.5rem;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    nav {
+      background-color: #e3ecf9;
+      padding: 1rem;
+      text-align: center;
+    }
+    nav button {
+      background-color: #6c9fd1;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      margin: 0.3rem;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    .container {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 1.5rem;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
+    .avatar-area {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .avatar {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: url('https://cdn-icons-png.flaticon.com/512/4712/4712027.png') no-repeat center center;
+      background-size: cover;
+      margin: 0 auto 1rem;
+      border: 4px solid #4a90e2;
+    }
+    .button-group {
+      text-align: center;
+      margin-top: 1rem;
+    }
+    button {
+      background-color: #4a90e2;
+      color: white;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      margin: 0.5rem;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+    button:hover {
+      background-color: #3a78c2;
+    }
+    .teacher-panel, .student-panel, .dashboard-panel, .create-task-panel, .reports-panel {
+      display: none;
+    }
+    .section-title {
+      font-weight: bold;
+      margin-top: 2rem;
+      font-size: 1.2rem;
+      color: #333;
+    }
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+    .table th, .table td {
+      border: 1px solid #ccc;
+      padding: 0.5rem;
+      text-align: center;
+      font-size: 0.95rem;
+    }
+    label, input, select {
+      display: block;
+      margin: 0.5rem 0;
+      font-size: 1rem;
+    }
+    input, select {
+      padding: 0.4rem;
+      width: 100%;
+      box-sizing: border-box;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    שיחון AI ללימוד עברית
+  </header>
+  <nav>
+    <button onclick="showPanel('dashboard')">🏠 לוח ניהול</button>
+    <button onclick="showPanel('create-task')">📝 יצירת משימה</button>
+    <button onclick="showPanel('reports')">📊 דוחות</button>
+    <button onclick="toggleView()">🔁 עבור לתצוגת <span id="view-label">תלמיד</span></button>
+  </nav>
+
+  <div class="container student-panel">
+    <div class="avatar-area">
+      <div class="avatar"></div>
+      <p style="font-size: 1.1rem; color: #333;">שלום יוסי! בוא נתחיל בתרגול שלנו היום 🎙️</p>
+    </div>
+    <div class="button-group">
+      <button onclick="alert('חזרה על הטקסט האחרון')">🔁 חזור</button>
+      <button onclick="alert('הנחיות ודגשים לשיחה')">📋 דגשים</button>
+      <button onclick="alert('סיכום ומשוב')">📝 סיכום</button>
+    </div>
+  </div>
+
+  <div class="container dashboard-panel teacher-panel">
+    <h2>שלום, מורה רינה 👩‍🏫</h2>
+    <p>בחרי פעולה מהתפריט למעלה כדי להתחיל לעבוד עם הכיתה שלך.</p>
+  </div>
+
+  <div class="container create-task-panel teacher-panel">
+    <h2>יצירת משימת שיחה חדשה</h2>
+    <label>רמת שפה: <select><option>מתחילים</option><option>בינוני</option><option>מתקדם</option></select></label>
+    <label>נושא: <input type="text" placeholder="לדוג׳: בקנייה במכולת"></label>
+    <label>אוצר מילים: <input type="text" placeholder="שלום, כמה, עולה, בבקשה"></label>
+    <label>כללים לשוניים: <input type="text" placeholder="שימוש בעתיד, פועל בגוף ראשון"></label>
+    <button onclick="alert('המשימה נשמרה')">✔️ שמור משימה</button>
+  </div>
+
+  <div class="container reports-panel teacher-panel">
+    <h2>דוחות תלמידים ודוחות כיתה</h2>
+    <div class="section-title">דוחות תלמיד</div>
+    <table class="table">
+      <tr><th>שם</th><th>🗣️ שמע</th><th>📊 סטטיסטיקות</th></tr>
+      <tr>
+        <td>יואב לוי</td>
+        <td><button onclick="alert('נוגן שיחה של יואב')">▶️</button></td>
+        <td><button onclick="alert('משך: 4:15 דקות\nציון: 85\nמסקנה: כדאי לחזק שימוש בפעלים')">📈</button></td>
+      </tr>
+      <tr>
+        <td>דנה כהן</td>
+        <td><button onclick="alert('נוגן שיחה של דנה')">▶️</button></td>
+        <td><button onclick="alert('משך: 5:10 דקות\nציון: 92\nמסקנה: מצוינת בשיחה חופשית')">📈</button></td>
+      </tr>
+    </table>
+    <div class="section-title">דוח כיתתי</div>
+    <button onclick="alert('83% מהתלמידים עמדו במשימה\nנושא פועל עתיד – נדרש חיזוק')">📋 דו"ח כיתה</button>
+  </div>
+
+  <script>
+    let isTeacher = true;
+
+    function toggleView() {
+      isTeacher = !isTeacher;
+      document.querySelectorAll('.teacher-panel').forEach(p => p.style.display = isTeacher ? 'block' : 'none');
+      document.querySelector('.student-panel').style.display = isTeacher ? 'none' : 'block';
+      document.getElementById('view-label').innerText = isTeacher ? 'תלמיד' : 'מורה';
+    }
+
+    function showPanel(panel) {
+      document.querySelectorAll('.teacher-panel').forEach(p => p.style.display = 'none');
+      document.querySelector(`.${panel}-panel`).style.display = 'block';
+      document.querySelector('.student-panel').style.display = 'none';
+      isTeacher = true;
+      document.getElementById('view-label').innerText = 'תלמיד';
+    }
+
+    // ברירת מחדל
+    showPanel('dashboard');
+  </script>
+</body>
+</html>
